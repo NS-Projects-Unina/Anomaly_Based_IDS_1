@@ -1,6 +1,6 @@
 # Docker Network Project
 
-This project sets up a network of Docker containers consisting of two clients and one server. The clients generate network traffic and send packets to the server, which displays the received packets.
+This project sets up a network of Docker containers consisting of two clients and one server. The clients generate network traffic and send packets to the server, which displays the received packets and predicts the type of traffic by machine learning.
 
 ## Project Structure
 
@@ -10,12 +10,14 @@ docker-network-project
 │   ├── Dockerfile
 │   └── app
 │       └── client1.py
+|       └── file.txt
 ├── client2
 │   ├── Dockerfile
 │   └── app
 │       └── client2.py
 ├── server
 │   ├── Dockerfile
+|   └── modello_addestrato.joblib
 │   └── app
 │       └── server.py
 ├── docker-compose.yml
