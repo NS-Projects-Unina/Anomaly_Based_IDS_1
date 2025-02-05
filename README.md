@@ -6,21 +6,8 @@ This project sets up a network of Docker containers consisting of two clients an
 
 ```
 docker-network-project
-├── client1
-│   ├── Dockerfile
-│   └── app
-│       └── client1.py
-|       └── file.txt
-├── client2
-│   ├── Dockerfile
-│   └── app
-│       └── client2.py
-├── server
-│   ├── Dockerfile
-|   └── modello_addestrato.joblib
-│   └── app
-│       └── server.py
-├── docker-compose.yml
+├── project-fakeTraffic
+├── project-realTraffic
 └── README.md
 ```
 
@@ -56,15 +43,6 @@ To stop the running containers, press `Ctrl + C` in the terminal where the conta
 ```
 docker-compose down
 ```
-
-## Client Implementation
-
-- **client1/app/client1.py**: This script generates network traffic and sends packets to the server.
-- **client2/app/client2.py**: This script also generates network traffic and sends packets to the server.
-
-## Server Implementation
-
-- **server/app/server.py**: This script listens for incoming packets from the clients and displays the received network packets.
 
 ## License
 
