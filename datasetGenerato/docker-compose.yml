@@ -1,0 +1,123 @@
+version: '3.8'
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
+services:
+  router:
+    build: ./router
+    container_name: router
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    ports:
+      - "5000:5000"
+    networks:
+      - net
+
+  client1:
+    build: ./client1
+    container_name: client1
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - net
+    depends_on:
+      - router
+    privileged: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      - GATEWAY=router
+    ports:
+      - "6001:6001"
+      - "7001:7001"
+
+  client2:
+    build: ./client2
+    container_name: client2
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - net
+    depends_on:
+      - router
+    privileged: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      - GATEWAY=router
+    ports:
+      - "6002:6002"
+      - "7002:7002"
+
+  client3:
+    build: ./client3
+    container_name: client3
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - net
+    depends_on:
+      - router
+    privileged: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      - GATEWAY=router
+    ports:
+      - "6003:6003"
+      - "7003:7003"
+
+  dns_server:
+    build: ./serverDNS
+    container_name: serverDNS
+    ports:
+      - "1053:53/udp"
+      - "1053:53/tcp"
+
+    restart: unless-stopped
+    networks:
+      - net
+    depends_on:
+      - router
+    environment:
+      - GATEWAY=router
+      - DNS_SERVER=8.8.8.8
+
+  ssh_server:
+    build: ./serverSSH
+    container_name: serverSSH
+    ports:
+      - "1022:22"
+
+    restart: unless-stopped
+    networks:
+      - net
+    depends_on:
+      - router
+    environment:
+      - GATEWAY=router
+      - SSH_USER=root
+      - SSH_PASS=rootpassword
+
+  telnet_server:
+    build: ./serverTELNET
+    container_name: serverTELNET
+    ports:
+      - "2323:23"
+
+    restart: unless-stopped
+    networks:
+      - net
+    depends_on:
+      - router
+    environment:
+      - GATEWAY=router
