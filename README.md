@@ -8,6 +8,8 @@ This project sets up a network of Docker containers consisting of two clients an
 docker-network-project
 ├── project-fakeTraffic
 ├── project-realTraffic
+├── catturaTraffico
+├── datasetGenerato
 └── README.md
 ```
 
