@@ -1,6 +1,6 @@
 # Docker Network Project
 
-This project sets up a network of Docker containers consisting of two clients and one server. The clients generate network traffic and send packets to the server, which displays the received packets and predicts the type of traffic by machine learning.
+This project sets up different networks of Docker containers for tesing an AI-Powered NIDS (Network Intrusion Detection System). There are four different subprojects: each of them with different approach.
 
 ## Project Structure
 
